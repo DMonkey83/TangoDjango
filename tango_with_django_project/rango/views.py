@@ -7,6 +7,7 @@ def index(request):
 
 
 def about(request):
-    context_dict = {'boldaboutmessage': "Here is the about message!"}
+    context_dict = {
+        'boldaboutmessage': "This tutorial has been put together by me "}
     return render(request, 'rango/about.html', context=context_dict)
 # Create your views here.
