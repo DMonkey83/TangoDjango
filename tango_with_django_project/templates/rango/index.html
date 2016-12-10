@@ -12,10 +12,32 @@
     <h1>Rango says...</h1>
     <div>
     hey there partner!<br/>
+    </div>
+    <a href="/rango/add_category/">Add a New Category</a><br />
+    <div>
+	<h1>Most Liked Categories</h1>
+	{% if categories %}
+    	<ul>
+       	{% for category in categories %}
+	<li><a href="/rango/category/{{ category.slug }}">{{ category.name }}</a></li>
+	{% endfor %}
+    	</ul>
+	{% endif %}
+    </div>
+    <div>
+	<h1>Most Viewed Pages</h1>
+	{% if pages %}
+    	<ul>
+		{% for page in pages %}
+		<li><a href="{{ page.url }}">{{ page.title }}</a></li>
+		{% endfor %}
+    	</ul>
+	{% endif %}
+    </div>
     <strong>{{ boldmessage }}</strong><br />
     </div>
     <div>
-        <a href="/rango/about/">About</a><br />
+	    <a href="{% url 'about' %}">About</a><br />
         
         <img src="{% static 'images/under.jpg' %}" alt="Picture of underwar" />
     </div>

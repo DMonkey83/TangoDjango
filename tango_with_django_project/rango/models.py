@@ -1,10 +1,17 @@
 from django.db import models
+from django.template.defaultfilters import slugify
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=128, unique=True)
+    length = 128
+    name = models.CharField(max_length=length, unique=True)
     views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -14,8 +21,9 @@ class Category(models.Model):
 
 
 class Page(models.Model):
+    length = 128
     category = models.ForeignKey(Category)
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=length)
     url = models.URLField()
     views = models.IntegerField(default=0)
     likes = models.IntegerField(default=0)
